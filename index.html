@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyCharm & Python Adaptiv Test</title>
+    <title>PyCharm & Python Interactive Code Lab</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'JetBrains Mono', 'Segoe UI', Tahoma, monospace;
         }
 
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: #1e1e1e;
+            color: #abb2bf;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,14 +22,14 @@
             padding: 20px;
         }
 
-        .quiz-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 650px;
+        .main-card {
+            background-color: #2b2b2b;
+            border: 1px solid #3c3f41;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 780px;
             width: 100%;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
         }
 
         .header {
@@ -37,282 +37,412 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 12px;
+            border-bottom: 1px solid #3c3f41;
+            padding-bottom: 14px;
         }
 
         .level-badge {
-            background: linear-gradient(135deg, #0284c7, #2563eb);
-            padding: 6px 14px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #21487f, #365880);
+            border: 1px solid #4570a5;
+            padding: 6px 16px;
+            border-radius: 6px;
             font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
+            font-weight: bold;
+            color: #ffffff;
         }
 
-        .streak-board {
+        .stats {
             font-size: 0.9rem;
-            color: #94a3b8;
+            color: #a9b7c6;
         }
 
-        .question {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            color: #f1f5f9;
-        }
-
-        .code-block {
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
-            color: #38bdf8;
-            margin-bottom: 20px;
-            white-space: pre-wrap;
-        }
-
-        .options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .option-btn {
-            background-color: #334155;
-            color: #f8fafc;
-            border: 2px solid transparent;
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            background-color: #475569;
-            border-color: #38bdf8;
-        }
-
-        .option-btn.correct {
-            background-color: #065f46 !important;
-            border-color: #10b981 !important;
-            color: #ecfdf5;
-        }
-
-        .option-btn.wrong {
-            background-color: #991b1b !important;
-            border-color: #ef4444 !important;
-            color: #fef2f2;
-        }
-
-        .status-msg {
-            font-size: 0.95rem;
+        .task-title {
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 15px;
-            display: none;
+            color: #e6e6e6;
+            line-height: 1.5;
+            background: #212121;
+            padding: 14px;
+            border-radius: 8px;
+            border-left: 4px solid #4a88c7;
         }
 
-        .status-msg.success { color: #34d399; }
-        .status-msg.fail { color: #f87171; }
+        .editor-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .editor-header {
+            background-color: #3c3f41;
+            color: #bbbbbb;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .code-editor {
+            width: 100%;
+            height: 140px;
+            background-color: #1e1e1e;
+            color: #a9b7c6;
+            border: 1px solid #3c3f41;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            padding: 12px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            line-height: 1.5;
+        }
+
+        .code-editor:focus {
+            border-color: #4b6eaf;
+        }
 
         .controls {
             display: flex;
-            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
-        .next-btn {
-            background: linear-gradient(135deg, #0284c7, #2563eb);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
+        .btn {
+            padding: 10px 22px;
+            border-radius: 6px;
             font-weight: 600;
-            border-radius: 8px;
+            border: none;
             cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-run {
+            background-color: #499c54;
+            color: white;
+        }
+
+        .btn-run:hover {
+            background-color: #368040;
+        }
+
+        .btn-next {
+            background-color: #3574f0;
+            color: white;
             display: none;
         }
 
-        .next-btn:hover {
-            opacity: 0.9;
+        .btn-next:hover {
+            background-color: #245cb7;
+        }
+
+        .console-box {
+            background-color: #1e1e1e;
+            border-radius: 6px;
+            padding: 14px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            min-height: 80px;
+            border: 1px solid #3c3f41;
+        }
+
+        .console-header {
+            font-size: 0.75rem;
+            color: #808080;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .console-output {
+            color: #98c379;
+            white-space: pre-wrap;
+        }
+
+        .result-msg {
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .result-msg.success { 
+            background-color: rgba(73, 156, 84, 0.2); 
+            color: #61ce70;
+            border: 1px solid #499c54;
+        }
+        .result-msg.error { 
+            background-color: rgba(224, 108, 117, 0.2); 
+            color: #e06c75;
+            border: 1px solid #e06c75;
         }
     </style>
 </head>
 <body>
 
-    <div class="quiz-card">
+    <div class="main-card">
         <div class="header">
-            <span class="level-badge" id="levelBadge">Daraja: 1 (Boshlang'ich)</span>
-            <span class="streak-board" id="streakBoard">Ketma-ket to'g'ri: 0</span>
+            <span class="level-badge" id="levelBadge">Daraja: 1</span>
+            <span class="stats" id="statsBoard">To'g'ri: 0 | Xato: 0</span>
         </div>
 
-        <div class="question" id="questionText">Savol yuklanmoqda...</div>
-        <div class="code-block" id="codeBlock" style="display: none;"></div>
+        <div class="task-title" id="taskTitle">Topshiriq yuklanmoqda...</div>
 
-        <div class="options-grid" id="optionsContainer"></div>
-
-        <div class="status-msg" id="statusMsg"></div>
+        <div class="editor-wrapper">
+            <div class="editor-header">
+                <span>main.py</span>
+                <span>Python 3.10</span>
+            </div>
+            <textarea class="code-editor" id="codeEditor" placeholder="Kodingizni shu yerga yozing..." spellcheck="false"></textarea>
+        </div>
 
         <div class="controls">
-            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Keyingi savol ➔</button>
+            <button class="btn btn-run" onclick="runCode()">Run ▶</button>
+            <button class="btn btn-next" id="nextBtn" onclick="nextTask()">Keyingi savol ➔</button>
         </div>
+
+        <div class="console-box">
+            <div class="console-header">Run Output / Terminal</div>
+            <div class="console-output" id="consoleOutput">Kodni ishga tushirish uchun "Run" tugmasini bosing...</div>
+        </div>
+
+        <div class="result-msg" id="resultMsg"></div>
     </div>
 
     <script>
-        // Savollar darajalar bo'yicha ajratilgan (1 - Oson, 2 - O'rta, 3 - Qiyin)
-        const questionsByLevel = {
+        // Kengaytirilgan topshiriqlar bazasi (Har bir daraja uchun 5 ta va undan ko'p topshiriq)
+        const tasksDatabase = {
             1: [
-                {
-                    q: "PyCharm'da kodni ishga tushirish (Run) uchun qaysi klaviatura tugmalari bosiladi?",
-                    code: "",
-                    options: ["Shift + F10", "Ctrl + F5", "Alt + F9", "Ctrl + Shift + R"],
-                    correct: 0
-                },
-                {
-                    q: "PyCharm'da joriy qatorni izohga (comment) olish tugmasi qaysi?",
-                    code: "",
-                    options: ["Ctrl + /", "Alt + /", "Ctrl + C", "Shift + Esc"],
-                    correct: 0
-                },
-                {
-                    q: "Ushbu Python kodi brauzer/terminalga nima chiqaradi?",
-                    code: "x = [1, 2, 3]\nprint(x[1])",
-                    options: ["1", "2", "3", "IndexError"],
-                    correct: 1
-                }
+                { title: 'Ekran ekraniga 1 raqamini chiqaruvchi kod yozing.', expected: "1", initialCode: "# 1 raqamini chiqaring
+" },
+                { title: 'Ekran ekraniga "Salom" so'zini chiqaruvchi kod yozing.', expected: "Salom", initialCode: "" },
+                { title: 'Ekran ekraniga 100 sonini chiqaruvchi kod yozing.', expected: "100", initialCode: "" },
+                { title: 'Ekran ekraniga 5 va 5 ning yig'indisini chiqaruvchi kod yozing.', expected: "10", initialCode: "" },
+                { title: 'Ekran ekraniga "PyCharm" matnini chiqaruvchi kod yozing.', expected: "PyCharm", initialCode: "" },
+                { title: 'Ekran ekraniga True mantiqiy qiymatini (Boolean) print qiling.', expected: "True", initialCode: "" }
             ],
             2: [
-                {
-                    q: "PyCharm'da koddagi o'zgaruvchi nomini barcha joyda xavfsiz o'zgartirish (Refactor / Rename) komandasi qaysi?",
-                    code: "",
-                    options: ["Ctrl + R", "Shift + F6", "Alt + F6", "Ctrl + Alt + L"],
-                    correct: 1
-                },
-                {
-                    q: "PyCharm interfeysida Pep8 bo'yicha kodni formatlash (Reformat Code) uchun nima bosiladi?",
-                    code: "",
-                    options: ["Ctrl + Alt + L", "Ctrl + Shift + F", "Alt + Enter", "Shift + F10"],
-                    correct: 0
-                },
-                {
-                    q: "Ushbu kod bajarilgach 'result' qiymati nima bo'ladi?",
-                    code: "nums = [1, 2, 3, 4, 5]\nresult = nums[1:4]",
-                    options: ["[1, 2, 3]", "[2, 3, 4]", "[2, 3, 4, 5]", "[1, 2, 3, 4]"],
-                    correct: 1
-                }
+                { title: 'x = 15 va y = 25 deb o'zgaruvchi oling va ularning yig'indisini print qiling.', expected: "40", initialCode: "x = 15
+y = 25
+" },
+                { title: 'a = "PyCharm" o'zgaruvchisining uzunligini (len) print qiling.', expected: "7", initialCode: 'a = "PyCharm"
+' },
+                { title: 'nums = [10, 20, 30] ro'yxatidagi 20 sonini (indeks orqali) print qiling.', expected: "20", initialCode: "nums = [10, 20, 30]
+" },
+                { title: '7 ning kvadratini (7**2) print qiling.', expected: "49", initialCode: "" },
+                { title: 'd = {"name": "Ali", "age": 20} lug'atidan (dict) "name" kalitining qiymatini print qiling.', expected: "Ali", initialCode: 'd = {"name": "Ali", "age": 20}
+' },
+                { title: 'a = 45 va b = 5. Ularning bo'linmasini (a / b) print qiling.', expected: "9.0", initialCode: "a = 45
+b = 5
+" },
+                { title: 'st = "  python  " matnining atrofdagi bo'shliqlarni olib tashlab (strip) print qiling.', expected: "python", initialCode: 'st = "  python  "
+' }
             ],
             3: [
-                {
-                    q: "PyCharm Debugger rejimida kodni qatorma-qator va funksiya ichiga kirmasdan (Step Over) bajarish tugmasi qaysi?",
-                    code: "",
-                    options: ["F8", "F7", "Shift + F8", "Alt + F5"],
-                    correct: 0
-                },
-                {
-                    q: "Ushbu murakkab list slicing amali natijasi nima bo'ladi?",
-                    code: "data = [10, 20, 30, 40, 50, 60]\nprint(data[-2::-2])",
-                    options: ["[50, 30, 10]", "[60, 40, 20]", "[50, 40, 30]", "[40, 20]"],
-                    correct: 0
-                },
-                {
-                    q: "PyCharm'da 'Evaluate Expression' oynasini Debug vaqtida chaqirish tugmasi qaysi?",
-                    code: "",
-                    options: ["Alt + F8", "Ctrl + F8", "Shift + F9", "Alt + Enter"],
-                    correct: 0
-                }
+                { title: 'numbers = [1, 2, 3, 4, 5] ro'yxatidagi barcha elementlar yig'indisini (sum) print qiling.', expected: "15", initialCode: "numbers = [1, 2, 3, 4, 5]
+" },
+                { title: 'text = "python" so'zidagi barcha harflarni katta harfga o'tkazib (upper) print qiling.', expected: "PYTHON", initialCode: 'text = "python"
+' },
+                { title: 'data = [5, 2, 9, 1] ro'yxatidagi eng katta elementni (max) print qiling.', expected: "9", initialCode: "data = [5, 2, 9, 1]
+" },
+                { title: 'txt = "Hello World" matnidan slice orqali faqat "Hello" qismini print qiling.', expected: "Hello", initialCode: 'txt = "Hello World"
+' },
+                { title: 'nums = [1, 2, 3, 4, 5, 6] ro'yxatidan juft sonlarni filter qilib [2, 4, 6] ro'yxatini print qiling.', expected: "[2, 4, 6]", initialCode: "nums = [1, 2, 3, 4, 5, 6]
+" },
+                { title: 'lst = ["apple", "banana"] ro'yxatiga "cherry" elementini qo'shib (append), yangilangan ro'yxatni print qiling.', expected: "['apple', 'banana', 'cherry']", initialCode: 'lst = ["apple", "banana"]
+' },
+                { title: 'sentence = "Python is great" matnini bo'shliq bo'yicha bo mezon bilan bo'lib (split) ro'yxat ko'rinishida print qiling.', expected: "['Python', 'is', 'great']", initialCode: 'sentence = "Python is great"
+' },
+                { title: 'vals = [10, 20, 30] ro'yxatini teskari tartibda (slice [::-1] yordamida) print qiling.', expected: "[30, 20, 10]", initialCode: "vals = [10, 20, 30]
+" },
+                { title: 'num = -15 ning abs() funksiyasi orqali absolut (musbat) qiymatini print qiling.', expected: "15", initialCode: "num = -15
+" }
             ]
         };
 
         let currentLevel = 1;
-        let streak = 0;
-        let currentQuestion = null;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let currentTask = null;
+        let lastTaskTitle = "";
 
-        function getLevelName(lvl) {
-            if (lvl === 1) return "1 (Boshlang'ich)";
-            if (lvl === 2) return "2 (O'rta)";
-            return "3 (Qiyin / Ekspert)";
+        function getRandomTask() {
+            const levelPool = tasksDatabase[currentLevel];
+            let selected;
+            do {
+                const randomIndex = Math.floor(Math.random() * levelPool.length);
+                selected = levelPool[randomIndex];
+            } while (selected.title === lastTaskTitle && levelPool.length > 1);
+            
+            lastTaskTitle = selected.title;
+            return selected;
         }
 
-        function loadQuestion() {
-            const nextBtn = document.getElementById('nextBtn');
-            const statusMsg = document.getElementById('statusMsg');
-            nextBtn.style.display = 'none';
-            statusMsg.style.display = 'none';
+        function loadTask() {
+            currentTask = getRandomTask();
+            document.getElementById('taskTitle').textContent = currentTask.title;
+            document.getElementById('codeEditor').value = currentTask.initialCode;
+            document.getElementById('consoleOutput').textContent = 'Kodni ishga tushirish uchun "Run" tugmasini bosing...';
+            
+            const resultMsg = document.getElementById('resultMsg');
+            resultMsg.style.display = 'none';
+            resultMsg.textContent = '';
 
-            // Hozirgi darajadan tasodifiy savol olish
-            const pool = questionsByLevel[currentLevel];
-            const randomIndex = Math.floor(Math.random() * pool.length);
-            currentQuestion = pool[randomIndex];
-
-            document.getElementById('levelBadge').textContent = `Daraja: ${getLevelName(currentLevel)}`;
-            document.getElementById('streakBoard').textContent = `Ketma-ket to'g'ri: ${streak}`;
-            document.getElementById('questionText').textContent = currentQuestion.q;
-
-            const codeBlock = document.getElementById('codeBlock');
-            if (currentQuestion.code) {
-                codeBlock.textContent = currentQuestion.code;
-                codeBlock.style.display = 'block';
-            } else {
-                codeBlock.style.display = 'none';
-            }
-
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-
-            currentQuestion.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.textContent = opt;
-                btn.onclick = () => checkAnswer(idx, btn);
-                optionsContainer.appendChild(btn);
-            });
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('levelBadge').textContent = `Daraja: ${currentLevel}`;
+            document.getElementById('statsBoard').textContent = `To'g'ri: ${correctAnswers} | Xato: ${wrongAnswers}`;
         }
 
-        function checkAnswer(selectedIdx, selectedBtn) {
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.disabled = true);
+        function executePythonSimulation(code) {
+            let output = [];
+            const lines = code.split('
+');
+            let context = {};
 
-            const statusMsg = document.getElementById('statusMsg');
-            statusMsg.style.display = 'block';
+            for (let line of lines) {
+                line = line.trim();
+                if (!line || line.startsWith('#')) continue;
 
-            if (selectedIdx === currentQuestion.correct) {
-                selectedBtn.classList.add('correct');
-                streak++;
-                
-                // Har 2 ta to'g'ri javobdan so'ng daraja oshadi (Max: Level 3)
-                if (streak % 2 === 0 && currentLevel < 3) {
-                    currentLevel++;
-                    statusMsg.textContent = "🔥 Barakalla! Darajangiz oshdi!";
-                } else {
-                    statusMsg.textContent = "✅ To'g me'yorda ketyapsiz!";
+                // Method calls on lists like lst.append("cherry")
+                if (line.includes('.append(')) {
+                    let parts = line.split('.append(');
+                    let varName = parts[0].trim();
+                    let valToAppend = parts[1].replace(')', '').trim().replace(/['"]/g, '');
+                    if (context[varName] && Array.isArray(context[varName])) {
+                        context[varName].push(valToAppend);
+                    }
+                    continue;
                 }
-                statusMsg.className = "status-msg success";
+
+                // Variable assignment
+                if (line.includes('=') && !line.startsWith('print') && !line.includes('==')) {
+                    const parts = line.split('=');
+                    const varName = parts[0].trim();
+                    const varVal = parts[1].trim();
+                    try {
+                        context[varName] = eval(varVal);
+                    } catch(e) {
+                        context[varName] = varVal.replace(/['"]/g, '');
+                    }
+                    continue;
+                }
+
+                // print statement evaluation
+                if (line.startsWith('print(') && line.endsWith(')')) {
+                    let content = line.substring(6, line.length - 1).trim();
+                    
+                    try {
+                        let evaluated;
+                        
+                        if (content.includes('.strip()')) {
+                            let varName = content.replace('.strip()', '').trim();
+                            let target = context[varName] || varName;
+                            evaluated = String(target).trim();
+                        } else if (content.includes('.split()')) {
+                            let varName = content.replace('.split()', '').trim();
+                            let target = context[varName] || eval(varName);
+                            evaluated = JSON.stringify(String(target).split(' ')).replace(/"/g, "'");
+                        } else if (content.includes('.upper()')) {
+                            let varName = content.replace('.upper()', '').trim();
+                            evaluated = String(context[varName] || varName).toUpperCase();
+                        } else if (content.startsWith('abs(')) {
+                            let inner = content.substring(4, content.length - 1).trim();
+                            let val = context[inner] !== undefined ? context[inner] : Number(inner);
+                            evaluated = Math.abs(val);
+                        } else if (content.startsWith('sum(')) {
+                            let inner = content.substring(4, content.length - 1).trim();
+                            let arr = context[inner] || eval(inner);
+                            evaluated = arr.reduce((a, b) => a + b, 0);
+                        } else if (content.startsWith('max(')) {
+                            let inner = content.substring(4, content.length - 1).trim();
+                            let arr = context[inner] || eval(inner);
+                            evaluated = Math.max(...arr);
+                        } else if (content.startsWith('len(')) {
+                            let inner = content.substring(4, content.length - 1).trim();
+                            let val = context[inner] !== undefined ? context[inner] : inner.replace(/['"]/g, '');
+                            evaluated = val.length;
+                        } else if (content.includes('[')) {
+                            // Slice or indexing logic
+                            let varName = content.split('[')[0].trim();
+                            let sliceExpr = content.split('[')[1].replace(']', '').trim();
+                            let target = context[varName] !== undefined ? context[varName] : eval(varName);
+
+                            if (sliceExpr === '::-1') {
+                                evaluated = JSON.stringify([...target].reverse());
+                            } else if (sliceExpr.includes(':')) {
+                                let parts = sliceExpr.split(':');
+                                let start = parts[0] ? Number(parts[0]) : 0;
+                                let end = parts[1] ? Number(parts[1]) : target.length;
+                                let res = target.slice(start, end);
+                                evaluated = typeof res === 'string' ? res : JSON.stringify(res);
+                            } else if (sliceExpr.startsWith("'") || sliceExpr.startsWith('"')) {
+                                let key = sliceExpr.replace(/['"]/g, '');
+                                evaluated = target[key];
+                            } else {
+                                evaluated = target[Number(sliceExpr)];
+                            }
+                        } else if (context.hasOwnProperty(content)) {
+                            let val = context[content];
+                            evaluated = Array.isArray(val) ? JSON.stringify(val).replace(/"/g, "'") : val;
+                        } else {
+                            let val = eval(content);
+                            evaluated = Array.isArray(val) ? JSON.stringify(val).replace(/"/g, "'") : val;
+                        }
+
+                        output.push(String(evaluated));
+                    } catch (e) {
+                        output.push(content.replace(/['"]/g, ''));
+                    }
+                }
+            }
+            return output.join('
+');
+        }
+
+        function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const consoleOutput = document.getElementById('consoleOutput');
+            const resultMsg = document.getElementById('resultMsg');
+            const nextBtn = document.getElementById('nextBtn');
+
+            const actualOutput = executePythonSimulation(code).trim();
+            consoleOutput.textContent = actualOutput || "(Natija yo'q - print ishlatdingizmi?)";
+
+            resultMsg.style.display = 'block';
+
+            if (actualOutput === currentTask.expected) {
+                resultMsg.textContent = "✅ To'g'ri! Barakalla!";
+                resultMsg.className = "result-msg success";
+                correctAnswers++;
+                
+                // Har 2 ta to'g'ri javobdan so'ng daraja oshadi
+                if (correctAnswers % 2 === 0 && currentLevel < 3) {
+                    currentLevel++;
+                }
             } else {
-                selectedBtn.classList.add('wrong');
-                buttons[currentQuestion.correct].classList.add('correct');
+                resultMsg.textContent = `❌ Noto'g'ri! Kutilgan natija: ${currentTask.expected}`;
+                resultMsg.className = "result-msg error";
+                wrongAnswers++;
                 
-                // Xato qilinganda daraja qaytadan 1-darajaga tushadi va streak nollanadi
+                // Yutqazsa (xato qilsa) daraja qaytadan 1-bosqichga tushadi
                 currentLevel = 1;
-                streak = 0;
-                
-                statusMsg.textContent = "❌ Noto'g'ri! Daraja va ballingiz nollashdi. Qaytadan 1-darajadan boshlaysiz.";
-                statusMsg.className = "status-msg fail";
             }
 
-            document.getElementById('nextBtn').style.display = 'block';
+            document.getElementById('statsBoard').textContent = `To'g'ri: ${correctAnswers} | Xato: ${wrongAnswers}`;
+            nextBtn.style.display = 'inline-block';
         }
 
-        function nextQuestion() {
-            loadQuestion();
+        function nextTask() {
+            loadTask();
         }
 
-        // Dastlabki yuklash
-        loadQuestion();
+        // Ilk yuklash
+        loadTask();
     </script>
 </body>
 </html>
