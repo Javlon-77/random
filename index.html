@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirli Veb-Sayt</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .display-box {
+            background-color: #0f172a;
+            border: 2px dashed #475569;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .content-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .sub-text {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .counter {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="title">Tugmani bosing</h1>
+        
+        <div class="display-box" id="box">
+            <div class="content-text" id="mainText">???</div>
+            <div class="sub-text" id="subText">Nima chiqishini sinab ko'ring</div>
+        </div>
+
+        <button class="btn" id="actionBtn" onclick="generateNext()">Aylantirish</button>
+        <div class="counter" id="counterText">Jami harakatlar: 0</div>
+    </div>
+
+    <script>
+        const items = [
+            { main: "⚡ 100 ta push-up qiling", sub: "Bugungi energiya dozasi" },
+            { main: "💧 1 stakan suv iching", sub: "Organizmni tetiklashtiring" },
+            { main: "📖 5 bet kitob o'qing", sub: "Miyani charxlang" },
+            { main: "🎯 Biror maqsadni yozing", sub: "Kuningizni tartibga soling" },
+            { main: "🧘 1 daqiqa chuqur nafas oling", sub: "Tinchlaning va diqqatni jamlang" },
+            { main: "🚶 10 daqiqa piyoda yuring", sub: "Harakatda baraka bor" },
+            { main: "🧹 Stolingizni tartiblang", sub: "Atrofingizni toza tuting" },
+            { main: "📱 Telefonsiz 15 daqiqa o'tiring", sub: "Raqamli detoks" }
+        ];
+
+        let count = 0;
+
+        function generateNext() {
+            count++;
+            const randomIndex = Math.floor(Math.random() * items.length);
+            const selected = items[randomIndex];
+
+            const mainText = document.getElementById('mainText');
+            const subText = document.getElementById('subText');
+            const box = document.getElementById('box');
+
+            mainText.textContent = selected.main;
+            subText.textContent = selected.sub;
+            document.getElementById('counterText').textContent = `Jami harakatlar: ${count}`;
+
+            box.style.borderColor = '#38bdf8';
+            setTimeout(() => {
+                box.style.borderColor = '#475569';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
