@@ -215,53 +215,34 @@
     </div>
 
     <script>
-        // Kengaytirilgan topshiriqlar bazasi (Har bir daraja uchun 5 ta va undan ko'p topshiriq)
         const tasksDatabase = {
             1: [
-                { title: 'Ekran ekraniga 1 raqamini chiqaruvchi kod yozing.', expected: "1", initialCode: "# 1 raqamini chiqaring
-" },
-                { title: 'Ekran ekraniga "Salom" so'zini chiqaruvchi kod yozing.', expected: "Salom", initialCode: "" },
+                { title: 'Ekran ekraniga 1 raqamini chiqaruvchi kod yozing.', expected: "1", initialCode: "# 1 raqamini chiqaring\n" },
+                { title: 'Ekran ekraniga "Salom" so\'zini chiqaruvchi kod yozing.', expected: "Salom", initialCode: "" },
                 { title: 'Ekran ekraniga 100 sonini chiqaruvchi kod yozing.', expected: "100", initialCode: "" },
-                { title: 'Ekran ekraniga 5 va 5 ning yig'indisini chiqaruvchi kod yozing.', expected: "10", initialCode: "" },
+                { title: 'Ekran ekraniga 5 va 5 ning yig\'indisini chiqaruvchi kod yozing.', expected: "10", initialCode: "" },
                 { title: 'Ekran ekraniga "PyCharm" matnini chiqaruvchi kod yozing.', expected: "PyCharm", initialCode: "" },
                 { title: 'Ekran ekraniga True mantiqiy qiymatini (Boolean) print qiling.', expected: "True", initialCode: "" }
             ],
             2: [
-                { title: 'x = 15 va y = 25 deb o'zgaruvchi oling va ularning yig'indisini print qiling.', expected: "40", initialCode: "x = 15
-y = 25
-" },
-                { title: 'a = "PyCharm" o'zgaruvchisining uzunligini (len) print qiling.', expected: "7", initialCode: 'a = "PyCharm"
-' },
-                { title: 'nums = [10, 20, 30] ro'yxatidagi 20 sonini (indeks orqali) print qiling.', expected: "20", initialCode: "nums = [10, 20, 30]
-" },
+                { title: 'x = 15 va y = 25 deb o\'zgaruvchi oling va ularning yig\'indisini print qiling.', expected: "40", initialCode: "x = 15\ny = 25\n" },
+                { title: 'a = "PyCharm" o\'zgaruvchisining uzunligini (len) print qiling.', expected: "7", initialCode: 'a = "PyCharm"\n' },
+                { title: 'nums = [10, 20, 30] ro\'yxatidagi 20 sonini (indeks orqali) print qiling.', expected: "20", initialCode: "nums = [10, 20, 30]\n" },
                 { title: '7 ning kvadratini (7**2) print qiling.', expected: "49", initialCode: "" },
-                { title: 'd = {"name": "Ali", "age": 20} lug'atidan (dict) "name" kalitining qiymatini print qiling.', expected: "Ali", initialCode: 'd = {"name": "Ali", "age": 20}
-' },
-                { title: 'a = 45 va b = 5. Ularning bo'linmasini (a / b) print qiling.', expected: "9.0", initialCode: "a = 45
-b = 5
-" },
-                { title: 'st = "  python  " matnining atrofdagi bo'shliqlarni olib tashlab (strip) print qiling.', expected: "python", initialCode: 'st = "  python  "
-' }
+                { title: 'd = {"name": "Ali", "age": 20} lug\'atidan (dict) "name" kalitining qiymatini print qiling.', expected: "Ali", initialCode: 'd = {"name": "Ali", "age": 20}\n' },
+                { title: 'a = 45 va b = 5. Ularning bo\'linmasini (a / b) print qiling.', expected: "9.0", initialCode: "a = 45\nb = 5\n" },
+                { title: 'st = "  python  " matnining atrofdagi bo\'shliqlarni olib tashlab (strip) print qiling.', expected: "python", initialCode: 'st = "  python  "\n' }
             ],
             3: [
-                { title: 'numbers = [1, 2, 3, 4, 5] ro'yxatidagi barcha elementlar yig'indisini (sum) print qiling.', expected: "15", initialCode: "numbers = [1, 2, 3, 4, 5]
-" },
-                { title: 'text = "python" so'zidagi barcha harflarni katta harfga o'tkazib (upper) print qiling.', expected: "PYTHON", initialCode: 'text = "python"
-' },
-                { title: 'data = [5, 2, 9, 1] ro'yxatidagi eng katta elementni (max) print qiling.', expected: "9", initialCode: "data = [5, 2, 9, 1]
-" },
-                { title: 'txt = "Hello World" matnidan slice orqali faqat "Hello" qismini print qiling.', expected: "Hello", initialCode: 'txt = "Hello World"
-' },
-                { title: 'nums = [1, 2, 3, 4, 5, 6] ro'yxatidan juft sonlarni filter qilib [2, 4, 6] ro'yxatini print qiling.', expected: "[2, 4, 6]", initialCode: "nums = [1, 2, 3, 4, 5, 6]
-" },
-                { title: 'lst = ["apple", "banana"] ro'yxatiga "cherry" elementini qo'shib (append), yangilangan ro'yxatni print qiling.', expected: "['apple', 'banana', 'cherry']", initialCode: 'lst = ["apple", "banana"]
-' },
-                { title: 'sentence = "Python is great" matnini bo'shliq bo'yicha bo mezon bilan bo'lib (split) ro'yxat ko'rinishida print qiling.', expected: "['Python', 'is', 'great']", initialCode: 'sentence = "Python is great"
-' },
-                { title: 'vals = [10, 20, 30] ro'yxatini teskari tartibda (slice [::-1] yordamida) print qiling.', expected: "[30, 20, 10]", initialCode: "vals = [10, 20, 30]
-" },
-                { title: 'num = -15 ning abs() funksiyasi orqali absolut (musbat) qiymatini print qiling.', expected: "15", initialCode: "num = -15
-" }
+                { title: 'numbers = [1, 2, 3, 4, 5] ro\'yxatidagi barcha elementlar yig\'indisini (sum) print qiling.', expected: "15", initialCode: "numbers = [1, 2, 3, 4, 5]\n" },
+                { title: 'text = "python" so\'zidagi barcha harflarni katta harfga o\'tkazib (upper) print qiling.', expected: "PYTHON", initialCode: 'text = "python"\n' },
+                { title: 'data = [5, 2, 9, 1] ro\'yxatidagi eng katta elementni (max) print qiling.', expected: "9", initialCode: "data = [5, 2, 9, 1]\n" },
+                { title: 'txt = "Hello World" matnidan slice orqali faqat "Hello" qismini print qiling.', expected: "Hello", initialCode: 'txt = "Hello World"\n' },
+                { title: 'nums = [1, 2, 3, 4, 5, 6] ro\'yxatidan juft sonlarni filter qilib [2, 4, 6] ro\'yxatini print qiling.', expected: "[2, 4, 6]", initialCode: "nums = [1, 2, 3, 4, 5, 6]\n" },
+                { title: 'lst = ["apple", "banana"] ro\'yxatiga "cherry" elementini qo\'shib (append), yangilangan ro\'yxatni print qiling.', expected: "['apple', 'banana', 'cherry']", initialCode: 'lst = ["apple", "banana"]\n' },
+                { title: 'sentence = "Python is great" matnini bo\'shliq bo\'yicha bo\'lib (split) ro\'yxat ko\'rinishida print qiling.', expected: "['Python', 'is', 'great']", initialCode: 'sentence = "Python is great"\n' },
+                { title: 'vals = [10, 20, 30] ro\'yxatini teskari tartibda (slice [::-1] yordamida) print qiling.', expected: "[30, 20, 10]", initialCode: "vals = [10, 20, 30]\n" },
+                { title: 'num = -15 ning abs() funksiyasi orqali absolut (musbat) qiymatini print qiling.', expected: "15", initialCode: "num = -15\n" }
             ]
         };
 
@@ -300,15 +281,13 @@ b = 5
 
         function executePythonSimulation(code) {
             let output = [];
-            const lines = code.split('
-');
+            const lines = code.split('\n');
             let context = {};
 
             for (let line of lines) {
                 line = line.trim();
                 if (!line || line.startsWith('#')) continue;
 
-                // Method calls on lists like lst.append("cherry")
                 if (line.includes('.append(')) {
                     let parts = line.split('.append(');
                     let varName = parts[0].trim();
@@ -319,7 +298,6 @@ b = 5
                     continue;
                 }
 
-                // Variable assignment
                 if (line.includes('=') && !line.startsWith('print') && !line.includes('==')) {
                     const parts = line.split('=');
                     const varName = parts[0].trim();
@@ -332,7 +310,6 @@ b = 5
                     continue;
                 }
 
-                // print statement evaluation
                 if (line.startsWith('print(') && line.endsWith(')')) {
                     let content = line.substring(6, line.length - 1).trim();
                     
@@ -367,7 +344,6 @@ b = 5
                             let val = context[inner] !== undefined ? context[inner] : inner.replace(/['"]/g, '');
                             evaluated = val.length;
                         } else if (content.includes('[')) {
-                            // Slice or indexing logic
                             let varName = content.split('[')[0].trim();
                             let sliceExpr = content.split('[')[1].replace(']', '').trim();
                             let target = context[varName] !== undefined ? context[varName] : eval(varName);
@@ -400,8 +376,7 @@ b = 5
                     }
                 }
             }
-            return output.join('
-');
+            return output.join('\n');
         }
 
         function runCode() {
@@ -420,7 +395,6 @@ b = 5
                 resultMsg.className = "result-msg success";
                 correctAnswers++;
                 
-                // Har 2 ta to'g'ri javobdan so'ng daraja oshadi
                 if (correctAnswers % 2 === 0 && currentLevel < 3) {
                     currentLevel++;
                 }
@@ -429,7 +403,6 @@ b = 5
                 resultMsg.className = "result-msg error";
                 wrongAnswers++;
                 
-                // Yutqazsa (xato qilsa) daraja qaytadan 1-bosqichga tushadi
                 currentLevel = 1;
             }
 
@@ -441,7 +414,6 @@ b = 5
             loadTask();
         }
 
-        // Ilk yuklash
         loadTask();
     </script>
 </body>
